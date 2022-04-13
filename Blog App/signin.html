@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+
+    <!-- BOOTSTRAP LINKS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- MATERIAL DESIGN ICONIC FONT -->
+    <link
+      rel="stylesheet"
+      href="design_files/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css"
+    />
+
+    <!-- STYLE CSS -->
+    <link rel="stylesheet" href="design_files/css/style.css" />
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-storage.js"></script>
+  </head>
+
+  <body>
+    <!-- Main Div -->
+    <div
+      class="wrapper"
+      style="background-image: url('design_files/images/loginback.jpg')"
+    >
+      <!-- Inner Box -->
+      <div class="inner">
+        <!-- Inner Image -->
+        <div class="image-holder">
+          <img src="design_files/images/login.jpg" />
+        </div>
+
+        <!-- Login Form -->
+        <form action="">
+          <h3>Login</h3>
+
+          <!-- Input Email Div -->
+          <div class="form-wrapper">
+            <input
+              id="email"
+              type="email"
+              placeholder="Email Address"
+              class="form-control"
+            />
+            <i class="zmdi zmdi-email"></i>
+          </div>
+
+          <!-- Input Password Div -->
+          <div class="form-wrapper">
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              class="form-control"
+            />
+            <i class="zmdi zmdi-lock"></i>
+          </div>
+
+          <!-- Login Button -->
+          <div class="form-group container-login100-form-btn">
+            <button id="btn-login" type="button">
+              Login
+              <i class="zmdi zmdi-arrow-right"></i>
+            </button>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="w-full text-center p-t-27 p-b-239">
+            <span class="text-muted">
+              <a href="forgetPassword.html" class="text-dark">
+                Forgot username / password?
+              </a>
+            </span>
+          </div>
+
+          <!-- Link To Sign Up -->
+          <div
+            class="w-full text-center"
+            style="margin-top: 66%; font-size: 15px"
+          >
+            <span class="text-dark"
+              >Don't have an account?
+              <a href="signup.html"> Register </a>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Auth Redirect -->
+    <script src="js/index.js"></script>
+    <script>
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          var userID = firebase.auth().currentUser.uid;
+
+          firebase
+            .database()
+            .ref("Users/" + userID)
+            .once("value")
+            .then(function (snapshot) {
+              if (snapshot.val()) {
+                window.location.href = "MainPage.html";
+              } else {
+                window.location.href = "accountSettings.html";
+              }
+            });
+        }
+      });
+    </script>
+  </body>
+</html>
