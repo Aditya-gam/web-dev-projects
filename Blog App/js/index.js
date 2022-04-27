@@ -2,7 +2,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyAm6xJ20aobojG3FyQRB1nilwFOeTXm6mA",
   authDomain: "blogapp-1b310.firebaseapp.com",
-  databaseURL: "https://blogapp-1b310-default-rtdb.firebaseio.com/",
+  databaseURL: "https://blogapp-1b310-default-rtdb.firebaseio.com",
   projectId: "blogapp-1b310",
   storageBucket: "blogapp-1b310.appspot.com",
   messagingSenderId: "313038588308",
